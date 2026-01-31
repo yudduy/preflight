@@ -1,4 +1,4 @@
-# preflight
+# Preflight
 
 Profile DPO preference datasets before training. Catches data quality issues that silently degrade RLHF performance.
 
