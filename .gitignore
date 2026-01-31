@@ -1,4 +1,9 @@
 __pycache__/
 *.pyc
 *.egg-info/
-preflight.egg-info/
+dist/
+build/
+venv/
+.pytest_cache/
+*.json
+!examples/*.json
