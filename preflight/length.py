@@ -10,8 +10,15 @@ def _binomtest_pvalue(k: int, n: int, p: float = 0.5) -> float:
         return 1.0
 
     def _binom_pmf(x: int, n: int, p: float) -> float:
-        coeff = math.comb(n, x)
-        return coeff * (p ** x) * ((1 - p) ** (n - x))
+        if p == 0.0:
+            return 1.0 if x == 0 else 0.0
+        if p == 1.0:
+            return 1.0 if x == n else 0.0
+        log_pmf = (
+            math.lgamma(n + 1) - math.lgamma(x + 1) - math.lgamma(n - x + 1)
+            + x * math.log(p) + (n - x) * math.log(1 - p)
+        )
+        return math.exp(log_pmf)
 
     observed_pmf = _binom_pmf(k, n, p)
     pval = sum(_binom_pmf(x, n, p) for x in range(n + 1) if _binom_pmf(x, n, p) <= observed_pmf + 1e-15)
